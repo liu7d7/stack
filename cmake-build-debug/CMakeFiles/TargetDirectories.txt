@@ -1,0 +1,3 @@
+C:/Users/richard may clarkson/CLionProjects/stack/cmake-build-debug/CMakeFiles/stack.dir
+C:/Users/richard may clarkson/CLionProjects/stack/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/richard may clarkson/CLionProjects/stack/cmake-build-debug/CMakeFiles/rebuild_cache.dir
