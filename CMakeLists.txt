@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(include)
 
-add_executable(stack main.cpp include/lexer.h include/global.h src/lexer.cpp)
+add_executable(stack main.cpp include/lexer.h include/global.h src/lexer.cpp src/interpreter.cpp include/interpreter.h)

@@ -1,0 +1,15 @@
+>a
+>b
+99 a
+head:
+a 2 b ==
+b ^tail
+a " bottles of beer on the wall, " a " bottles of beer.\n" $
+a 1 a -
+"take one down and pass it around, " a " bottles of beer on the wall.\n" $
+!b ^head
+tail:
+"2 bottles of beer on the wall, 2 bottles of beer.\ntake one down and pass it around, 1 bottle of beer on the wall.\n" $
+"1 bottle of beer on the wall, 1 bottle of beer.\ntake one down and pass it around, no bottles of beer on the wall.\n" $
+<b
+<a

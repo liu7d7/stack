@@ -1,0 +1,47 @@
+`calculator`
+>a
+>b
+>c
+>d
+a ?
+b ?
+c ?
+a a (float)
+c c (float)
+b "+" d ==
+d ^add
+b "-" d ==
+d ^sub
+b "*" d ==
+d ^mul
+b "/" d ==
+d ^div
+b "%" d ==
+d ^mod
+"invalid operation" $
+1 ^end
+add:
+a c d +
+d $
+1 ^end
+sub:
+a c d -
+d $
+1 ^end
+mul:
+a c d +
+d $
+1 ^end
+div:
+a c d /
+d $
+1 ^end
+mod:
+a c d %
+d $
+1 ^end
+end:
+<d
+<c
+<b
+<a

@@ -20,11 +20,15 @@ static std::unordered_map<char, tok_type_e> opMap = {
       {'+', tok_type_e::add},
       {'-', tok_type_e::sub},
       {'?', tok_type_e::read},
-      {'^', tok_type_e::jump},
       {',', tok_type_e::comma},
       {'.', tok_type_e::dot},
       {'[', tok_type_e::begina},
       {']', tok_type_e::enda},
+      {'%', tok_type_e::mod},
+      {'!', tok_type_e::not_},
+      {'&', tok_type_e::and_},
+      {'|', tok_type_e::or_},
+      {'#', tok_type_e::xor_},
 };
 
 std::string lexer::to_string(ref(file_pos_t) in) {
@@ -228,6 +232,7 @@ tok_t handle_str() {
          continue;
       }
       ss << cur;
+      advance();
    }
    advance();
    return tok_t { .type = tok_type_e::str, .content = ss.str(), .filePos = start_end_pos(start, pos) };
@@ -281,15 +286,25 @@ tok_t handle_chr() {
    return tok_t { .type = tok_type_e::chr, .content = std::to_string(ch), .filePos = start_end_pos(start, pos) };
 }
 
-tok_t handle_col() {
-   file_pos_t start = copy_pos(pos);
+tok_t handle_jmp() {
    advance();
-   std::stringstream ss;
-   while (type_of(cur) != tok_type_e::endl) {
-      ss << cur;
-      advance();
+   std::pair<std::string, file_pos_t> ident = get_id();
+   if (ident.first.empty()) {
+      error = "lexer::handle_jmp: expected identifier after jmp, got (" + std::to_string(cur) + ")";
+      return tok_t {};
    }
-   return tok_t { .type = lexer::colon, .content = ss.str(), .filePos = start_end_pos(start, pos) };
+   return tok_t { .type = tok_type_e::jump, .content = ident.first, .filePos = ident.second };
+}
+
+tok_t handle_cast() {
+   advance();
+   std::pair<std::string, file_pos_t> ident = get_id();
+   if (ident.first.empty() || cur != ')') {
+      error = "lexer::handle_cast: expected identifier | ')' after '(', got '" + std::string(1, cur) + "'";
+      return tok_t {};
+   }
+   advance();
+   return tok_t { .type = tok_type_e::cast, .content = ident.first, .filePos = ident.second };
 }
 
 void handle_comment() {
@@ -305,7 +320,8 @@ void handle_comment() {
 
 void sanitize(mutref(std::vector<tok_t>) toks) {
    for (mutref(tok_t) tok : toks) {
-      tok.content = replace_all(tok.content, "\n", "newline");
+      if (tok.type == lexer::endl)
+         tok.content = replace_all(tok.content, "\n", "endl");
    }
 }
 
@@ -341,9 +357,13 @@ std::vector<tok_t> lexer::lex() {
             // chr
             toks.push_back(handle_chr());
             break;
-         case ':':
-            // colon
-            toks.push_back(handle_col());
+         case '^':
+            // jmp
+            toks.push_back(handle_jmp());
+            break;
+         case '(':
+            // cast
+            toks.push_back(handle_cast());
             break;
          default:
             file_pos_t start = copy_pos(pos);
@@ -359,6 +379,7 @@ std::vector<tok_t> lexer::lex() {
             if (isalpha(cur)) {
                std::pair<std::string, file_pos_t> id = get_id();
                if (cur == ':') {
+                  advance();
                   toks.push_back(tok_t { .type = tok_type_e::label, .content = id.first, .filePos = id.second });
                   goto Tail;
                } else if (is_stack(id.first)) {

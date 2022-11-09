@@ -1,0 +1,12 @@
+`coffee machine`
+`a is the type of coffee`
+`b is the temperature`
+>a
+>b
+"What kind of coffee do you want?\n" $
+a ?
+"How hot should it be?\n" $
+b ?
+"Here is your " a ". It is " b ".\n" $
+<b
+<a

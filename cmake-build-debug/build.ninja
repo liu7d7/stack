@@ -63,6 +63,13 @@ build CMakeFiles/stack.dir/src/lexer.cpp.obj: CXX_COMPILER__stack_Debug C$:/User
   OBJECT_DIR = CMakeFiles\stack.dir
   OBJECT_FILE_DIR = CMakeFiles\stack.dir\src
 
+build CMakeFiles/stack.dir/src/interpreter.cpp.obj: CXX_COMPILER__stack_Debug C$:/Users/richard$ may$ clarkson/CLionProjects/stack/src/interpreter.cpp || cmake_object_order_depends_target_stack
+  DEP_FILE = CMakeFiles\stack.dir\src\interpreter.cpp.obj.d
+  FLAGS = -g
+  INCLUDES = -I"C:/Users/richard may clarkson/CLionProjects/stack/include"
+  OBJECT_DIR = CMakeFiles\stack.dir
+  OBJECT_FILE_DIR = CMakeFiles\stack.dir\src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target stack
@@ -71,7 +78,7 @@ build CMakeFiles/stack.dir/src/lexer.cpp.obj: CXX_COMPILER__stack_Debug C$:/User
 #############################################
 # Link the executable stack.exe
 
-build stack.exe: CXX_EXECUTABLE_LINKER__stack_Debug CMakeFiles/stack.dir/main.cpp.obj CMakeFiles/stack.dir/src/lexer.cpp.obj
+build stack.exe: CXX_EXECUTABLE_LINKER__stack_Debug CMakeFiles/stack.dir/main.cpp.obj CMakeFiles/stack.dir/src/lexer.cpp.obj CMakeFiles/stack.dir/src/interpreter.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\stack.dir

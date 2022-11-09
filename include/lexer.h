@@ -18,6 +18,7 @@ namespace lexer {
       mul,
       div,
       idiv,
+      mod,
       gt,
       gte,
       lt,
@@ -28,7 +29,7 @@ namespace lexer {
       endf,
       print,
       jump,
-      id,
+      id, // just for temp
       stack,
       str,
       chr,
@@ -41,15 +42,24 @@ namespace lexer {
       dot,
       begina,
       enda,
-      colon,
-      label
+      label,
+      array,
+      not_,
+      and_,
+      or_,
+      xor_,
+      cast,
+      nop
    };
 
    inline std::string to_string(tok_type_e in) {
       return (std::string[]) {
-         "endl", "add", "sub", "mul", "div", "idiv", "gt", "gte", "lt", "lte", "push", "pop",
-         "beginf", "endf", "print", "jump", "id", "stack", "str", "chr", "integer", "fp", "eq",
-         "neq", "read", "comma", "dot", "begina", "enda", "colon", "label"
+         "endl", "add", "sub", "mul", "div", "idiv", "mod",
+         "gt", "gte", "lt", "lte", "push", "pop",
+         "beginf", "endf", "print", "jump", "id",
+         "stack", "str", "chr", "integer", "fp", "eq",
+         "neq", "read", "comma", "dot", "begina",
+         "enda", "label", "array", "not", "and", "or", "xor", "cast", "nop"
       }[in];
    }
 

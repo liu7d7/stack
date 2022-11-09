@@ -7,7 +7,9 @@
 
 // makes a const reference
 #define ref(x) const x&
+#define ptr(x) const x*
 #define mutref(x) x&
+#define mutptr(x) x*
 
 // utility functions
 inline std::string replace_all(ref(std::string) str, ref(std::string) from, ref(std::string) to) {
@@ -18,6 +20,11 @@ inline std::string replace_all(ref(std::string) str, ref(std::string) from, ref(
       start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
    }
    return copy;
+}
+
+template<typename t>
+inline t any_cast(void* ptr) {
+   return *reinterpret_cast<t*>(ptr);
 }
 
 // general purpose typedefs, so I don't have to type out uint32_t and such
